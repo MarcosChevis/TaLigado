@@ -12,27 +12,49 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     lazy var but: UIButton = {
         let but = UIButton(frame: .zero)
+        view.addSubview(but)
         but.translatesAutoresizingMaskIntoConstraints = false
+        
+        but.titleLabel?.text = "botao"
+        
+       
         
         but.addTarget(self, action: #selector(takePhoto), for: .touchUpInside)
         but.backgroundColor = .blue
-
+        
         
         return but
+    }()
+    
+    lazy var label: UILabel = {
+        let label = UILabel(frame: .zero)
+        view.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "No Photo"
+        
+        but.titleLabel?.text = "botao"
+        
+        return label
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemRed
         
-        view.addSubview(but)
-        but.titleLabel?.text = "botao"
+        
+        setupConstraints()
+        
+    }
+    
+    func setupConstraints() {
         
         but.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         but.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         but.heightAnchor.constraint(equalToConstant: 100).isActive = true
         but.widthAnchor.constraint(equalToConstant: 100).isActive = true
         
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: but.bottomAnchor, constant: 32).isActive = true
     }
     
     @objc func takePhoto() {
@@ -61,16 +83,29 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         
         let handler = VNImageRequestHandler(cgImage: img.cgImage!)
-
+        
         let request = VNClassifyImageRequest()
         try? handler.perform([request])
-        let observations = request.results as? [VNClassificationObservation]
-        for obs in observations! {
-            if obs.confidence > 0.01 {
-                print(obs.identifier, obs.confidence)
+        guard let unfilteredObservations = request.results as? [VNClassificationObservation] else { return }
+        
+        var observation: VNClassificationObservation?
+        
+        for obs in unfilteredObservations {
+            if obs.identifier == "light" {
+                observation = obs
             }
         }
-        //print(request.results?.debugDescription)
+        
+        guard let obs = observation else { return }
+        
+        
+        
+        let title = obs.identifier
+        let number = obs.confidence
+        
+        print(title, number)
+        
+        label.text = title + " " + number.description
     }
     
 }
