@@ -4,7 +4,7 @@
 //
 //  Created by Marcos Chevis on 10/09/21.
 //
-
+import Accelerate
 import UIKit
 import Vision
 
@@ -73,8 +73,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            identifyLight(img: pickedImage)
             
+            let (binZero, binOne, binTwo, _) = histogram(image: pickedImage)
+            let contador:UInt = (binZero[binZero.count-1] + binOne[binZero.count-1] + binTwo[binZero.count-1])/3
+                
+            label.text = String(contador)
         }
         picker.dismiss(animated: true, completion: nil)
     }
@@ -106,6 +109,55 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         print(title, number)
         
         label.text = title + " " + number.description
+    }
+
+
+    /// Get histograms for R, G, B, A channels of UIImage
+    /// https://stackoverflow.com/questions/37818720/swift-2-2-count-black-pixels-in-uiimage
+    /// https://stackoverflow.com/questions/40562889/drawing-histogram-of-cgimage-in-swift-3
+    /// https://developer.apple.com/documentation/accelerate/specifying_histograms_with_vimage
+    func histogram(image: UIImage) -> (red: [UInt], green: [UInt], blue: [UInt], alpha: [UInt]) {
+        let img: CGImage = CIImage(image: image)!.cgImage!
+
+        let imgProvider: CGDataProvider = img.dataProvider!
+        let imgBitmapData: CFData = imgProvider.data!
+        var imgBuffer = vImage_Buffer(
+            data: UnsafeMutableRawPointer(mutating: CFDataGetBytePtr(imgBitmapData)),
+            height: vImagePixelCount(img.height),
+            width: vImagePixelCount(img.width),
+            rowBytes: img.bytesPerRow)
+
+        // bins: zero = red, green = one, blue = two, alpha = three
+        var binZero = [vImagePixelCount](repeating: 0, count: 256)
+        var binOne = [vImagePixelCount](repeating: 0, count: 256)
+        var binTwo = [vImagePixelCount](repeating: 0, count: 256)
+        var binThree = [vImagePixelCount](repeating: 0, count: 256)
+        
+        binZero.withUnsafeMutableBufferPointer { zeroPtr in
+            binOne.withUnsafeMutableBufferPointer { onePtr in
+                binTwo.withUnsafeMutableBufferPointer { twoPtr in
+                    binThree.withUnsafeMutableBufferPointer { threePtr in
+                        
+                        var histogramBins = [zeroPtr.baseAddress, onePtr.baseAddress,
+                                             twoPtr.baseAddress, threePtr.baseAddress]
+                        
+                        histogramBins.withUnsafeMutableBufferPointer {
+                            histogramBinsPtr in
+                            let error = vImageHistogramCalculation_ARGB8888(
+                                &imgBuffer,
+                                histogramBinsPtr.baseAddress!,
+                                vImage_Flags(kvImageNoFlags))
+                            
+                            guard error == kvImageNoError else {
+                                fatalError("Error calculating histogram: \(error)")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return (binZero, binOne, binTwo, binThree)
     }
     
 }
