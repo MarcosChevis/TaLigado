@@ -16,6 +16,26 @@ class VisionObjectRecognitionViewController: ViewController {
     // Vision parts
     private var requests = [VNRequest]()
     
+    //controle de tempo de reconhecimento
+    let threshold: Double = 10
+    
+    var timeDetected: TimeInterval = 0 {
+        willSet {
+            previousTimeDetected = timeDetected
+        }
+        
+        didSet {
+            if previousTimeDetected < threshold && timeDetected >= threshold {
+                //postive feedback
+            }
+            if previousTimeDetected >= threshold && timeDetected < threshold {
+                //negative feedback
+            }
+        
+    }}
+    
+    var previousTimeDetected: TimeInterval = 0
+    
     
     override func setupAVCapture() {
         super.setupAVCapture()
@@ -79,6 +99,9 @@ class VisionObjectRecognitionViewController: ViewController {
                 DispatchQueue.main.async(execute: {
                     // perform all the UI updates on the main queue
                     if let results = request.results {
+                        //incrementar uma variavel
+                        self.lightTimeTracking(results)
+                        
                         self.drawVisionRequestResults(results)
                     }
                 })
@@ -89,6 +112,24 @@ class VisionObjectRecognitionViewController: ViewController {
         }
         
         return error
+    }
+    
+    func lightTimeTracking(_ results: [VNObservation]?) {
+        guard let results = results else { return }
+        
+        let gordurinha: Double = 1
+        let increment: Double = 1
+        let decrementPercent: Double = 0.9
+
+        if results.isEmpty {
+            self.timeDetected *= decrementPercent
+        } else {
+            self.timeDetected += increment
+        }
+        
+        if self.timeDetected >= threshold {
+            self.timeDetected = threshold + gordurinha
+        }
     }
     
     override func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
