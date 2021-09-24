@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 import Vision
 
-class VisionObjectRecognitionViewController: ViewController {
+class VisionObjectRecognitionViewController: CameraViewController {
     
     private var detectionOverlay: CALayer! = nil
     
@@ -157,47 +157,62 @@ class VisionObjectRecognitionViewController: ViewController {
                 continue
             }
             // Select only the label with the highest confidence.
-            let topLabelObservation = objectObservation.labels[0]
+            //let topLabelObservation = objectObservation.labels[0]
             let objectBounds = VNImageRectForNormalizedRect(objectObservation.boundingBox, Int(bufferSize.width), Int(bufferSize.height))
             
             let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds)
             
-            let textLayer = self.createTextSubLayerInBounds(objectBounds,
-                                                            identifier: topLabelObservation.identifier,
-                                                            confidence: topLabelObservation.confidence)
-            shapeLayer.addSublayer(textLayer)
+            
+            
             detectionOverlay.addSublayer(shapeLayer)
         }
         self.updateLayerGeometry()
         CATransaction.commit()
     }
     
-    func createRoundedRectLayerWithBounds(_ bounds: CGRect) -> CALayer {
-        let shapeLayer = CALayer()
+    func createRoundedRectLayerWithBounds(_ bounds: CGRect) -> CAShapeLayer {
+        let shapeLayer = CAShapeLayer()
         shapeLayer.bounds = bounds
         shapeLayer.position = CGPoint(x: bounds.midX, y: bounds.midY)
         shapeLayer.name = "Found Object"
-        shapeLayer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 0.2, 0.4])
-        shapeLayer.cornerRadius = 7
+        
+        let path = UIBezierPath()
+        
+        let offSet = fmin(bounds.width, bounds.height)/3
+        
+        //esquerda superior
+        path.move(to: CGPoint(x: bounds.minX + offSet, y: bounds.minY))
+        path.addLine(to: CGPoint(x: bounds.minX, y: bounds.minY))
+        path.addLine(to: CGPoint(x: bounds.minX, y: bounds.minY + offSet))
+        
+        //direita superior
+        path.move(to: CGPoint(x: bounds.minX + offSet, y: bounds.maxY))
+        path.addLine(to: CGPoint(x: bounds.minX, y: bounds.maxY))
+        path.addLine(to: CGPoint(x: bounds.minX, y: bounds.maxY - offSet))
+        
+        //esquerda inferior
+        path.move(to: CGPoint(x: bounds.maxX - offSet, y: bounds.minY))
+        path.addLine(to: CGPoint(x: bounds.maxX, y: bounds.minY))
+        path.addLine(to: CGPoint(x: bounds.maxX, y: bounds.minY + offSet))
+        
+        
+        //direita inferior
+        path.move(to: CGPoint(x: bounds.maxX - offSet, y: bounds.maxY))
+        path.addLine(to: CGPoint(x: bounds.maxX, y: bounds.maxY))
+        path.addLine(to: CGPoint(x: bounds.maxX, y: bounds.maxY - offSet))
+        
+        
+        shapeLayer.path = path.cgPath
+        shapeLayer.strokeColor = UIColor.systemYellow.cgColor
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.lineWidth = 10
+        
+        
+        
+        
         return shapeLayer
     }
     
-    func createTextSubLayerInBounds(_ bounds: CGRect, identifier: String, confidence: VNConfidence) -> CATextLayer {
-        let textLayer = CATextLayer()
-        textLayer.name = "Object Label"
-        let formattedString = NSMutableAttributedString(string: String(format: "\(identifier)\nConfidence:  %.2f", confidence))
-        let largeFont = UIFont(name: "Helvetica", size: 24.0)!
-        formattedString.addAttributes([NSAttributedString.Key.font: largeFont], range: NSRange(location: 0, length: identifier.count))
-        textLayer.string = formattedString
-        textLayer.bounds = CGRect(x: 0, y: 0, width: bounds.size.height - 10, height: bounds.size.width - 10)
-        textLayer.position = CGPoint(x: bounds.midX, y: bounds.midY)
-        textLayer.shadowOpacity = 0.7
-        textLayer.shadowOffset = CGSize(width: 2, height: 2)
-        textLayer.foregroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0.0, 0.0, 0.0, 1.0])
-        textLayer.contentsScale = 2.0 // retina rendering
-        // rotate the layer into screen orientation and scale and mirror
-        textLayer.setAffineTransform(CGAffineTransform(rotationAngle: CGFloat(.pi / 2.0)).scaledBy(x: 1.0, y: -1.0))
-        return textLayer
-    }
+
 }
 
