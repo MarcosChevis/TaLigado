@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0604FF1626FE46BA00943BF3 /* ViewControllerOnBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0604FF1526FE46BA00943BF3 /* ViewControllerOnBoarding.swift */; };
 		BA17917626EBF3B800D850EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA17917526EBF3B800D850EC /* AppDelegate.swift */; };
 		BA17917826EBF3B800D850EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA17917726EBF3B800D850EC /* SceneDelegate.swift */; };
 		BA17917A26EBF3B800D850EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA17917926EBF3B800D850EC /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0604FF1526FE46BA00943BF3 /* ViewControllerOnBoarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerOnBoarding.swift; sourceTree = "<group>"; };
 		BA17917226EBF3B800D850EC /* TaLigado.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaLigado.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA17917526EBF3B800D850EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA17917726EBF3B800D850EC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				BA17917726EBF3B800D850EC /* SceneDelegate.swift */,
 				BA17917926EBF3B800D850EC /* ViewController.swift */,
 				BA9FEA1926FBC5FB00BD5CCD /* VisionObjectRecognitionViewController.swift */,
+				0604FF1526FE46BA00943BF3 /* ViewControllerOnBoarding.swift */,
 				BA9FEA1B26FBC98300BD5CCD /* ObjectDetector.mlmodel */,
 				BA17917E26EBF3B900D850EC /* Assets.xcassets */,
 				BA17918026EBF3B900D850EC /* LaunchScreen.storyboard */,
@@ -144,6 +147,7 @@
 				BA17917626EBF3B800D850EC /* AppDelegate.swift in Sources */,
 				BA17917826EBF3B800D850EC /* SceneDelegate.swift in Sources */,
 				BA9FEA1C26FBC98300BD5CCD /* ObjectDetector.mlmodel in Sources */,
+				0604FF1626FE46BA00943BF3 /* ViewControllerOnBoarding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,7 +287,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QRB568C47A;
+				DEVELOPMENT_TEAM = NHY67K6358;
 				INFOPLIST_FILE = TaLigado/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -302,7 +306,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QRB568C47A;
+				DEVELOPMENT_TEAM = NHY67K6358;
 				INFOPLIST_FILE = TaLigado/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
