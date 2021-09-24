@@ -17,7 +17,24 @@ class VisionObjectRecognitionViewController: ViewController {
     private var requests = [VNRequest]()
     
     //controle de tempo de reconhecimento
-    var timeDetected: TimeInterval = 0
+    let threshold: Double = 10
+    
+    var timeDetected: TimeInterval = 0 {
+        willSet {
+            previousTimeDetected = timeDetected
+        }
+        
+        didSet {
+            if previousTimeDetected < threshold && timeDetected >= threshold {
+                //postive feedback
+            }
+            if previousTimeDetected >= threshold && timeDetected < threshold {
+                //negative feedback
+            }
+        
+    }}
+    
+    var previousTimeDetected: TimeInterval = 0
     
     
     override func setupAVCapture() {
@@ -100,7 +117,6 @@ class VisionObjectRecognitionViewController: ViewController {
     func lightTimeTracking(_ results: [VNObservation]?) {
         guard let results = results else { return }
         
-        let threshold: Double = 10
         let gordurinha: Double = 1
         let increment: Double = 1
         let decrementPercent: Double = 0.9
@@ -114,8 +130,6 @@ class VisionObjectRecognitionViewController: ViewController {
         if self.timeDetected >= threshold {
             self.timeDetected = threshold + gordurinha
         }
-        
-        
     }
     
     override func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
