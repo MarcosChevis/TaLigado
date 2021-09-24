@@ -27,9 +27,11 @@ class VisionObjectRecognitionViewController: CameraViewController {
         didSet {
             if previousTimeDetected < threshold && timeDetected >= threshold {
                 //postive feedback
+                vibrate(type: .success)
             }
             if previousTimeDetected >= threshold && timeDetected < threshold {
                 //negative feedback
+                vibrate(type: .error)
             }
         
     }}
@@ -207,12 +209,7 @@ class VisionObjectRecognitionViewController: CameraViewController {
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.lineWidth = 10
         
-        
-        
-        
         return shapeLayer
     }
-    
-
 }
 

@@ -15,6 +15,8 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     var bufferSize: CGSize = .zero
     var rootLayer: CALayer! = nil
     
+    var isVibrateActive: Bool = true
+    
     private lazy var previewView: UIView = view
     
     private let session = AVCaptureSession()
@@ -126,5 +128,16 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             exifOrientation = .up
         }
         return exifOrientation
+    }
+    
+    //MARK: -Haptic Feedback
+    func vibrate(type: UINotificationFeedbackGenerator.FeedbackType) {
+        if isVibrateActive {
+            DispatchQueue.main.async {
+                let notificationGenerator = UINotificationFeedbackGenerator()
+                notificationGenerator.prepare()
+                notificationGenerator.notificationOccurred(type)
+            }
+        }
     }
 }
