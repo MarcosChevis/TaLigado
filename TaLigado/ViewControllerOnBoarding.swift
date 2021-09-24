@@ -102,8 +102,9 @@ class ViewControllerOnBoarding: UIViewController {
     let pageControl = UIPageControl()
     pageControl.numberOfPages = arrayViews.count
     pageControl.currentPage = 0
-      pageControl.currentPageIndicatorTintColor = UIColor(named: "corLaranja")
-    pageControl.addTarget(self, action: #selector(pageControlTapHandler(sender:)), for: .touchUpInside)
+    pageControl.currentPageIndicatorTintColor = UIColor(named: "corLaranja")
+      pageControl.isEnabled = false
+    pageControl.addTarget(self, action: #selector(pageControlTapHandler(sender:)), for: .valueChanged)
     return pageControl
   }()
     
@@ -116,14 +117,51 @@ class ViewControllerOnBoarding: UIViewController {
         scrollView.scrollRectToVisible(frame, animated: true)
     
   }
+    
+    @objc
+    func addPageContol(){
+        scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x+view.frame.width, y: 0), animated: false)
+//        let pageIndex = round(scrollView.contentOffset.x / view.frame.width)
+//        pageControl.currentPage = Int(pageIndex)
+    }
+    
+    @objc
+    func subPageContol(){
+    scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x-view.frame.width, y: 0), animated: false)
+        let pageIndex = round(scrollView.contentOffset.x / view.frame.width)
+        pageControl.currentPage = Int(pageIndex)
+    }
+    
+    //MARK: -butão
+    lazy var butaoNext: UIButton = {
+        let button = UIButton(type: .system)
+            button.setTitle("Proximo", for: .normal)
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+            button.setTitleColor(UIColor(named: "corLaranja"), for: .normal)
+            button.addTarget(self, action: #selector(addPageContol), for: .touchUpInside)
+                
+        return button
+        
+    }()
+    
+    lazy var butaoPrevious: UIButton = {
+        let button = UIButton(type: .system)
+            button.setTitle("voltar", for: .normal)
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+            button.setTitleColor(UIColor(named: "corLaranja"), for: .normal)
+            button.addTarget(self, action: #selector(subPageContol), for: .touchUpInside)
+        return button
+    }()
 
     //MARK: -viewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
-      view.backgroundColor = UIColor(named: "corAzul")
+    view.backgroundColor = UIColor(named: "corAzul")
     view.addSubview(scrollView)
     view.addSubview(pageControl)
+    view.addSubview(butaoPrevious)
+    view.addSubview(butaoNext)
     setupConstraints()
     }
     
@@ -134,8 +172,8 @@ class ViewControllerOnBoarding: UIViewController {
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         let pageControlConstraints:[NSLayoutConstraint] = [
             pageControl.heightAnchor.constraint(equalToConstant: 50),
-            pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            pageControl.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 30),
+            pageControl.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -30),
             pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12)
         ]
         NSLayoutConstraint.activate(pageControlConstraints)
@@ -149,7 +187,21 @@ class ViewControllerOnBoarding: UIViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.frame.height/3)
             ]
             NSLayoutConstraint.activate(scrollViewConstraints)
-    
+        
+        //botoes
+        butaoNext.translatesAutoresizingMaskIntoConstraints=false
+        let butaoNextConstraints:[NSLayoutConstraint] = [
+            butaoNext.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+            butaoNext.rightAnchor.constraint(equalTo: view.rightAnchor, constant:-30)
+        ]
+        NSLayoutConstraint.activate(butaoNextConstraints)
+        
+        butaoPrevious.translatesAutoresizingMaskIntoConstraints=false
+        let butaoPreviousConstraints:[NSLayoutConstraint] = [
+            butaoPrevious.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+            butaoPrevious.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30)
+        ]
+        NSLayoutConstraint.activate(butaoPreviousConstraints)
     }
     
     func setupConstrainstsLabel(label:UILabel, view: UIView){
