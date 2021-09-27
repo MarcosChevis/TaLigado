@@ -146,6 +146,21 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         //Cor dos botão
         labelTemp.tintColor = UIColor(named: "corGelinho")
         
+        labelEstado.text = "À procura da luz"
+        
+        //Enum
+//        var estado = TextoLabelEstados.procurando
+//
+//        switch estado{
+//        case .ligado:
+//            labelEstado.text = "A luz está ligada"
+//        case .desligado:
+//            labelEstado.text = "A luz está desligada"
+//        case .procurando:
+//            labelEstado.text =  "À procura da luz"
+//
+//        }
+        
         return labelTemp
     }()
     
