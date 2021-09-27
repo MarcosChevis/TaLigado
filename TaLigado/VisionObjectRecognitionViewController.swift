@@ -28,10 +28,12 @@ class VisionObjectRecognitionViewController: CameraViewController {
             if previousTimeDetected < threshold && timeDetected >= threshold {
                 //postive feedback
                 vibrate(type: .success)
+                updateLabelEstado(state: .ligado)
             }
             if previousTimeDetected >= threshold && timeDetected < threshold {
                 //negative feedback
                 vibrate(type: .error)
+                updateLabelEstado(state: .desligado)
             }
         
     }}

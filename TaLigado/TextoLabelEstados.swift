@@ -8,5 +8,7 @@
 import Foundation
 
 enum TextoLabelEstados {
-    case ligado, procurando, desligado
+    case ligado
+    case procurando
+    case desligado
 }

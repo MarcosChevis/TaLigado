@@ -24,12 +24,14 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     private let videoDataOutput = AVCaptureVideoDataOutput()
     private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     
+    var defaults = UserDefaults.standard
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAVCapture()
         setupConstraints()
+        getVibrationState()
     }
     
     func setupAVCapture() {
@@ -121,6 +123,8 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         
         switchTemp.tintColor = UIColor(named: "corGelinho"); // the "off" color
         switchTemp.onTintColor = UIColor(named: "corLaranja"); // the "on" color
+        
+        switchTemp.addTarget(self, action: #selector(updateisVibrateActive), for: .touchUpInside)
         
         return switchTemp
     }()
@@ -233,6 +237,33 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     func callForOnBoarding(){
         let vc = ViewControllerOnBoarding(nibName: nibName, bundle: nil)
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    //MARK: -Interface
+    func updateLabelEstado(state: TextoLabelEstados) {
+        switch state{
+        case .ligado:
+            labelEstado.text = "A luz está ligada"
+        case .desligado:
+            labelEstado.text = "A luz está desligada"
+        case .procurando:
+            labelEstado.text =  "À procura da luz"
+            
+        }
+    }
+    
+    @objc func updateisVibrateActive() {
+        isVibrateActive.toggle()
+        defaults.setValue(isVibrateActive, forKey: "isVibrateActive")
+    }
+    
+    func getVibrationState() {
+        if defaults.bool(forKey: "isVibrateActive") == false {
+            isVibrateActive = false
+        } else {
+            isVibrateActive = true
+            switchVibracao.setOn(true, animated: false)
+        }
     }
     
     //MARK: -Memory Warning
