@@ -135,7 +135,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         labelTemp.backgroundColor = UIColor(named: "corAzul")
         
         //Cor dos botão
-        labelTemp.tintColor = UIColor(named: "corGelinho")
+        labelTemp.textColor = UIColor(named: "corGelinho")
         
         labelTemp.font = UIFont.boldSystemFont(ofSize: 16.0)
         labelTemp.text = "    Modo de Vibração "
@@ -150,7 +150,8 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         labelTemp.backgroundColor = UIColor(named: "corAzul")
         
         //Cor dos botão
-        labelTemp.tintColor = UIColor(named: "corGelinho")
+        labelTemp.textColor = UIColor(named: "corGelinho")
+        labelTemp.font = UIFont.boldSystemFont(ofSize: 20.0)
         
         labelTemp.textAlignment = .center
         
