@@ -11,7 +11,7 @@
 		0604FF1827022C1300943BF3 /* TextoLabelEstados.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0604FF1727022C1300943BF3 /* TextoLabelEstados.swift */; };
 		BA17917626EBF3B800D850EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA17917526EBF3B800D850EC /* AppDelegate.swift */; };
 		BA17917826EBF3B800D850EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA17917726EBF3B800D850EC /* SceneDelegate.swift */; };
-		BA17917A26EBF3B800D850EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA17917926EBF3B800D850EC /* ViewController.swift */; };
+		BA17917A26EBF3B800D850EC /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA17917926EBF3B800D850EC /* CameraViewController.swift */; };
 		BA17917F26EBF3B900D850EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA17917E26EBF3B900D850EC /* Assets.xcassets */; };
 		BA17918226EBF3B900D850EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA17918026EBF3B900D850EC /* LaunchScreen.storyboard */; };
 		BA9FEA1A26FBC5FB00BD5CCD /* VisionObjectRecognitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9FEA1926FBC5FB00BD5CCD /* VisionObjectRecognitionViewController.swift */; };
@@ -24,7 +24,7 @@
 		BA17917226EBF3B800D850EC /* TaLigado.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaLigado.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA17917526EBF3B800D850EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA17917726EBF3B800D850EC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BA17917926EBF3B800D850EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BA17917926EBF3B800D850EC /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BA17917E26EBF3B900D850EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA17918126EBF3B900D850EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA17918326EBF3B900D850EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -64,7 +64,7 @@
 			children = (
 				BA17917526EBF3B800D850EC /* AppDelegate.swift */,
 				BA17917726EBF3B800D850EC /* SceneDelegate.swift */,
-				BA17917926EBF3B800D850EC /* ViewController.swift */,
+				BA17917926EBF3B800D850EC /* CameraViewController.swift */,
 				BA9FEA1926FBC5FB00BD5CCD /* VisionObjectRecognitionViewController.swift */,
 				0604FF1526FE46BA00943BF3 /* ViewControllerOnBoarding.swift */,
 				0604FF1727022C1300943BF3 /* TextoLabelEstados.swift */,
@@ -145,7 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA17917A26EBF3B800D850EC /* ViewController.swift in Sources */,
+				BA17917A26EBF3B800D850EC /* CameraViewController.swift in Sources */,
 				BA9FEA1A26FBC5FB00BD5CCD /* VisionObjectRecognitionViewController.swift in Sources */,
 				BA17917626EBF3B800D850EC /* AppDelegate.swift in Sources */,
 				BA17917826EBF3B800D850EC /* SceneDelegate.swift in Sources */,
