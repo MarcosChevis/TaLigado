@@ -215,4 +215,3 @@ class VisionObjectRecognitionViewController: CameraViewController {
     
 
 }
-

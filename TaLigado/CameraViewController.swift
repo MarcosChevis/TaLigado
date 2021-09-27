@@ -27,6 +27,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAVCapture()
+        setupConstraints()
     }
     
     func setupAVCapture() {
@@ -81,6 +82,155 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         rootLayer = previewView.layer
         previewLayer.frame = rootLayer.bounds
         rootLayer.addSublayer(previewLayer)
+    }
+    
+    //MARK: -Elementos
+    
+    //botão
+    lazy var butaoQuestion: UIButton = {
+        let buttonTemp = UIButton()
+        buttonTemp.backgroundColor = UIColor(named: "corAzul")
+    
+        //primeiro seta uma configuração
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold, scale: .large)
+
+        //adicionado qual a imagem - SF Symbol - com a figuração criada acima
+         let largeBoldDoc = UIImage(systemName: "questionmark.circle.fill", withConfiguration: largeConfig)
+
+        //no final que voce está colocando realmente a imagem
+        buttonTemp.setImage(largeBoldDoc, for: .normal)
+        
+        //Cor dos botão
+        buttonTemp.tintColor = UIColor(named: "corGelinho")
+        
+        buttonTemp.layer.cornerRadius = 31
+        
+        buttonTemp.addTarget(self, action: #selector(callForOnBoarding), for: .touchUpInside)
+        
+        return buttonTemp
+    }()
+    
+    //Switch
+    lazy var switchVibracao: UISwitch = {
+        let switchTemp = UISwitch()
+        
+        //Cor dos botão
+        switchTemp.tintColor = UIColor(named: "corGelinho")
+        
+        switchTemp.tintColor = UIColor(named: "corGelinho"); // the "off" color
+        switchTemp.onTintColor = UIColor(named: "corLaranja"); // the "on" color
+        
+        return switchTemp
+    }()
+    
+    //labels
+    lazy var labelVibracao: UILabel = {
+        let labelTemp = UILabel()
+        labelTemp.backgroundColor = UIColor(named: "corAzul")
+        
+        //Cor dos botão
+        labelTemp.tintColor = UIColor(named: "corGelinho")
+        
+        labelTemp.font = UIFont.boldSystemFont(ofSize: 16.0)
+        labelTemp.text = "    Modo de Vibração "
+        
+        labelTemp.layer.masksToBounds = true
+        labelTemp.layer.cornerRadius = 31
+        return labelTemp
+    }()
+    
+    lazy var labelEstado: UILabel = {
+        let labelTemp = UILabel()
+        labelTemp.backgroundColor = UIColor(named: "corAzul")
+        
+        //Cor dos botão
+        labelTemp.tintColor = UIColor(named: "corGelinho")
+        
+        labelTemp.textAlignment = .center
+        
+        labelTemp.text = "À procura da luz"
+        
+        //Enum
+//        var estado = TextoLabelEstados.procurando
+//
+//        switch estado{
+//        case .ligado:
+//            labelEstado.text = "A luz está ligada"
+//        case .desligado:
+//            labelEstado.text = "A luz está desligada"
+//        case .procurando:
+//            labelEstado.text =  "À procura da luz"
+//
+//        }
+        
+        return labelTemp
+    }()
+    
+    //MARK: -Constraints
+    func setupConstraints(){
+        
+        let alturaInferiror:CGFloat = 62
+        //Botao de duvidas
+        butaoQuestion.translatesAutoresizingMaskIntoConstraints = false
+        previewView.addSubview(butaoQuestion)
+        let butaoQuestionConstraints:[NSLayoutConstraint] = [
+            butaoQuestion.widthAnchor.constraint(equalToConstant: alturaInferiror),
+            butaoQuestion.heightAnchor.constraint(equalToConstant: alturaInferiror),
+            butaoQuestion.trailingAnchor.constraint(equalTo: previewView.safeAreaLayoutGuide.trailingAnchor,constant: -35),
+            butaoQuestion.bottomAnchor.constraint(equalTo: previewView.safeAreaLayoutGuide.bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(butaoQuestionConstraints)
+        
+        labelVibracao.translatesAutoresizingMaskIntoConstraints = false
+        
+        previewView.addSubview(labelVibracao)
+        let labelVibracaoConstraints:[NSLayoutConstraint] = [
+            labelVibracao.heightAnchor.constraint(equalToConstant: alturaInferiror),
+            labelVibracao.leadingAnchor.constraint(equalTo: previewView.safeAreaLayoutGuide.leadingAnchor,constant: 25),
+            labelVibracao.trailingAnchor.constraint(equalTo: butaoQuestion.leadingAnchor,constant: -15),
+            labelVibracao.bottomAnchor.constraint(equalTo: previewView.safeAreaLayoutGuide.bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(labelVibracaoConstraints)
+        
+        labelEstado.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        //Switch Vibracao
+        switchVibracao.translatesAutoresizingMaskIntoConstraints = false
+        
+        let standardHeight: CGFloat = 31
+        let standardWidth: CGFloat = 51
+
+        let heightRatio = (alturaInferiror-20)/standardHeight
+        let widthRatio = ((alturaInferiror-20)*standardWidth/standardHeight)/standardWidth
+
+        switchVibracao.transform = CGAffineTransform(scaleX: widthRatio, y: heightRatio)
+        
+        previewView.addSubview(switchVibracao)
+        let switchVibracaoConstraints:[NSLayoutConstraint] = [
+            switchVibracao.widthAnchor.constraint(equalToConstant: 30),
+            switchVibracao.heightAnchor.constraint(equalToConstant: 30),
+            switchVibracao.trailingAnchor.constraint(equalTo: labelVibracao.trailingAnchor,constant: -switchVibracao.frame.width/2-10),
+            switchVibracao.centerYAnchor.constraint(equalTo: labelVibracao.centerYAnchor)
+        ]
+        NSLayoutConstraint.activate(switchVibracaoConstraints)
+        
+        previewView.addSubview(labelEstado)
+        let labelEstadoConstraints:[NSLayoutConstraint] = [
+            labelEstado.heightAnchor.constraint(equalToConstant: alturaInferiror),
+            labelEstado.leadingAnchor.constraint(equalTo: previewView.safeAreaLayoutGuide.leadingAnchor),
+            labelEstado.trailingAnchor.constraint(equalTo: previewView.safeAreaLayoutGuide.trailingAnchor),
+            labelEstado.centerYAnchor.constraint(equalTo: previewView.centerYAnchor,constant: 150)
+        ]
+        NSLayoutConstraint.activate(labelEstadoConstraints)
+
+        
+    }
+    
+    @objc
+    func callForOnBoarding(){
+        let vc = ViewControllerOnBoarding(nibName: nibName, bundle: nil)
+        self.present(vc, animated: true, completion: nil)
     }
     
     //MARK: -Memory Warning
