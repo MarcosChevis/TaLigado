@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "30707854-676D-4593-A2B8-368CCA25F846"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F870D4B8-9DA8-41DD-B5DB-813FFA5572FF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaLigado/ViewControllerOnBoarding.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "subPageContol()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F870D4B8-9DA8-41DD-B5DB-813FFA5572FF - ad7fc4b88a54553a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TaLigado.ViewControllerOnBoarding.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; TaLigado.ViewControllerOnBoarding"
+                  moduleName = "TaLigado"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vitorcheung/Desktop/TaLigado/TaLigado/ViewControllerOnBoarding.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "288">
+               </Location>
+               <Location
+                  uuid = "F870D4B8-9DA8-41DD-B5DB-813FFA5572FF - fadc053bb3c81f40"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TaLigado.ViewControllerOnBoarding.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;TaLigado.ViewControllerOnBoarding&gt;"
+                  moduleName = "TaLigado"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vitorcheung/Desktop/TaLigado/TaLigado/ViewControllerOnBoarding.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "264">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

@@ -212,4 +212,3 @@ class VisionObjectRecognitionViewController: CameraViewController {
         return shapeLayer
     }
 }
-
