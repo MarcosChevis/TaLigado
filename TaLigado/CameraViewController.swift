@@ -146,7 +146,9 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         //Cor dos botão
         labelTemp.tintColor = UIColor(named: "corGelinho")
         
-        labelEstado.text = "À procura da luz"
+        labelTemp.textAlignment = .center
+        
+        labelTemp.text = "À procura da luz"
         
         //Enum
 //        var estado = TextoLabelEstados.procurando
