@@ -26,24 +26,21 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     
     var defaults = UserDefaults.standard
     
-    
+    //MARK: -Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAVCapture()
         setupConstraints()
         getVibrationState()
         
-        if defaults.bool(forKey: "First Launch") == false {
-                    //aqui eh quando eh a primeira vez que entra no app
-                    defaults.setValue(true, forKey: "First Launch")
-                    callForOnBoarding()
-                    
-                } else {
-                    //aqui todas as outras vezes
-                    defaults.setValue(true, forKey: "First Launch")
-                }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        verifyFirstLaunch()
+    }
+    
+    //MARK: -AVCapture
     func setupAVCapture() {
         var deviceInput: AVCaptureDeviceInput!
         
@@ -245,6 +242,18 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     }
     
     //MARK: -Interface
+    func verifyFirstLaunch() {
+        if defaults.bool(forKey: "First Launch") == false {
+            //aqui eh quando eh a primeira vez que entra no app
+            defaults.setValue(true, forKey: "First Launch")
+            callForOnBoarding()
+            
+        } else {
+            //aqui todas as outras vezes
+            defaults.setValue(true, forKey: "First Launch")
+        }
+
+    }
     func updateLabelEstado(state: TextoLabelEstados) {
         switch state{
         case .ligado:
@@ -259,6 +268,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     
     @objc func callForOnBoarding(){
         let vc = ViewControllerOnBoarding(nibName: nibName, bundle: nil)
+        
         self.present(vc, animated: true, completion: nil)
     }
     
