@@ -141,6 +141,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         setupAVCapture()
         setupConstraints()
         getVibrationState()
+        setupVoiceOver()
     }
     
     func setupAVCapture() {
@@ -231,7 +232,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         let labelVibracaoConstraints:[NSLayoutConstraint] = [
             labelVibracao.topAnchor.constraint(equalTo: vibrationBackgroundView.topAnchor),
             labelVibracao.bottomAnchor.constraint(equalTo: vibrationBackgroundView.bottomAnchor),
-            labelVibracao.leadingAnchor.constraint(equalTo: vibrationBackgroundView.leadingAnchor, constant: 24)
+            labelVibracao.leadingAnchor.constraint(equalTo: vibrationBackgroundView.leadingAnchor, constant: 18)
         ]
         NSLayoutConstraint.activate(labelVibracaoConstraints)
         
@@ -277,6 +278,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             labelEstado.text =  "À procura da luz"
             
         }
+        UIAccessibility.post(notification: .announcement, argument: labelEstado.text)
     }
     
     @objc func callForOnBoarding(){
@@ -343,6 +345,37 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         }
         return exifOrientation
     }
+    //MARK: -Voice Over
+    
+    func setupVoiceOver(){
+        
+        butaoQuestion.isAccessibilityElement = true
+        butaoQuestion.accessibilityLabel = "Ajuda"
+        
+        labelVibracao.isAccessibilityElement = false
+        
+        switchVibracao.isAccessibilityElement = true
+        switchVibracao.accessibilityLabel = labelVibracao.text
+        
+//        let groupedElement = UIAccessibilityElement(accessibilityContainer: self)
+//        groupedElement.accessibilityLabel = "\(labelVibracao.text)"
+//        groupedElement.accessibilityFrameInContainerSpace = labelVibracao.frame.union(switchVibracao.frame)
+                
+        
+//        let myAction = UIAccessibilityCustomAction(
+//            name: "Custom Action",
+//            target: self,
+//            selector: #selector(updateisVibrateActive)
+//        )
+//
+//        vibrationBackgroundView.accessibilityCustomActions = [myAction]
+//
+//        self.accessibilityElements = [labelEstado, groupedElement, butaoQuestion]
+    
+
+    }
+    
+
     
     //MARK: -Haptic Feedback
     func vibrate(type: UINotificationFeedbackGenerator.FeedbackType) {
