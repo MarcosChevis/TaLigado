@@ -16,6 +16,7 @@ class ViewControllerOnBoarding: UIViewController {
     label.textAlignment = .center
     label.numberOfLines = 5
     label.font = UIFont .boldSystemFont(ofSize: 17.0)
+      label.textColor = UIColor(named: "corGelinho")
     view.addSubview(label)
 //    let imageName = "doubt1"
 //    let image = UIImage(named: imageName)
@@ -40,6 +41,7 @@ class ViewControllerOnBoarding: UIViewController {
     label.textAlignment = .center
     label.numberOfLines = 4
     label.font = UIFont .boldSystemFont(ofSize: 17.0)
+      label.textColor = UIColor(named: "corGelinho")
     view.addSubview(label)
     setupConstrainstsLabel(label: label, view: view)
 //    let imageName = "doubt2"
@@ -64,6 +66,7 @@ class ViewControllerOnBoarding: UIViewController {
     label.numberOfLines = 4
     label.font = UIFont .boldSystemFont(ofSize: 17.0)
     view.addSubview(label)
+      label.textColor = UIColor(named: "corGelinho")
     setupConstrainstsLabel(label: label, view: view)
 //    let imageName = "doubt3.1"
 //    let image = UIImage(named: imageName)
