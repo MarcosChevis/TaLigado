@@ -13,6 +13,8 @@ import Vision
 class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     var bufferSize: CGSize = .zero
+    let InferiorCustomSafeArea: CGFloat = 62
+    
     var rootLayer: CALayer! = nil
     
     var isVibrateActive: Bool = true
@@ -26,12 +28,120 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     
     var defaults = UserDefaults.standard
     
+    //MARK: -UIElements
+    //botão
+    lazy var butaoQuestion: UIButton = {
+        let buttonTemp = UIButton()
+        buttonTemp.backgroundColor = UIColor(named: "corAzul")
+        buttonTemp.translatesAutoresizingMaskIntoConstraints = false
     
+        //primeiro seta uma configuração
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold, scale: .large)
+
+        //adicionado qual a imagem - SF Symbol - com a figuração criada acima
+         let largeBoldDoc = UIImage(systemName: "questionmark.circle.fill", withConfiguration: largeConfig)
+
+        //no final que voce está colocando realmente a imagem
+        buttonTemp.setImage(largeBoldDoc, for: .normal)
+        
+        //Cor dos botão
+        buttonTemp.tintColor = UIColor(named: "corGelinho")
+        
+        buttonTemp.layer.cornerRadius = 31
+        
+        buttonTemp.addTarget(self, action: #selector(callForOnBoarding), for: .touchUpInside)
+        
+        return buttonTemp
+    }()
+    
+    lazy var vibrationBackgroundView: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(named: "corAzul")
+        
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = 32
+        
+        return view
+    }()
+    
+    //Switch
+    lazy var switchVibracao: UISwitch = {
+        let switchTemp = UISwitch()
+        
+        //Cor dos botão
+        switchTemp.tintColor = UIColor(named: "corGelinho")
+        
+        switchTemp.tintColor = UIColor(named: "corGelinho"); // the "off" color
+        switchTemp.onTintColor = UIColor(named: "corLaranja"); // the "on" color
+        
+        switchTemp.translatesAutoresizingMaskIntoConstraints = false
+        
+        let standardHeight: CGFloat = 31
+        let standardWidth: CGFloat = 51
+
+        let heightRatio = (InferiorCustomSafeArea-20)/standardHeight
+        let widthRatio = ((InferiorCustomSafeArea-20)*standardWidth/standardHeight)/standardWidth
+
+        switchTemp.transform = CGAffineTransform(scaleX: widthRatio, y: heightRatio)
+        
+        switchTemp.addTarget(self, action: #selector(updateisVibrateActive), for: .touchUpInside)
+        
+
+        
+        return switchTemp
+    }()
+    
+    //labels
+    lazy var labelVibracao: UILabel = {
+        let labelTemp = UILabel()
+        labelTemp.backgroundColor = UIColor(named: "corAzul")
+        labelTemp.translatesAutoresizingMaskIntoConstraints = false
+        //Cor dos botão
+        labelTemp.textColor = UIColor(named: "corGelinho")
+        
+        labelTemp.font = UIFont.boldSystemFont(ofSize: 16.0)
+        labelTemp.text = "Modo de Vibração "
+        
+        return labelTemp
+    }()
+    
+    lazy var labelEstado: UILabel = {
+        let labelTemp = UILabel()
+        labelTemp.backgroundColor = UIColor(named: "corAzul")
+        labelTemp.translatesAutoresizingMaskIntoConstraints = false
+        
+        //Cor dos botão
+        labelTemp.textColor = UIColor(named: "corGelinho")
+        labelTemp.font = UIFont.boldSystemFont(ofSize: 20.0)
+        
+        labelTemp.textAlignment = .center
+        
+        labelTemp.text = "À procura da luz"
+        
+        //Enum
+//        var estado = TextoLabelEstados.procurando
+//
+//        switch estado{
+//        case .ligado:
+//            labelEstado.text = "A luz está ligada"
+//        case .desligado:
+//            labelEstado.text = "A luz está desligada"
+//        case .procurando:
+//            labelEstado.text =  "À procura da luz"
+//
+//        }
+        
+        return labelTemp
+    }()
+    
+    //MARK: -Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAVCapture()
         setupConstraints()
         getVibrationState()
+        setupVoiceOver()
     }
     
     func setupAVCapture() {
@@ -88,158 +198,76 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         rootLayer.addSublayer(previewLayer)
     }
     
-    //MARK: -Elementos
     
-    //botão
-    lazy var butaoQuestion: UIButton = {
-        let buttonTemp = UIButton()
-        buttonTemp.backgroundColor = UIColor(named: "corAzul")
-    
-        //primeiro seta uma configuração
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold, scale: .large)
-
-        //adicionado qual a imagem - SF Symbol - com a figuração criada acima
-         let largeBoldDoc = UIImage(systemName: "questionmark.circle.fill", withConfiguration: largeConfig)
-
-        //no final que voce está colocando realmente a imagem
-        buttonTemp.setImage(largeBoldDoc, for: .normal)
-        
-        //Cor dos botão
-        buttonTemp.tintColor = UIColor(named: "corGelinho")
-        
-        buttonTemp.layer.cornerRadius = 31
-        
-        buttonTemp.addTarget(self, action: #selector(callForOnBoarding), for: .touchUpInside)
-        
-        return buttonTemp
-    }()
-    
-    //Switch
-    lazy var switchVibracao: UISwitch = {
-        let switchTemp = UISwitch()
-        
-        //Cor dos botão
-        switchTemp.tintColor = UIColor(named: "corGelinho")
-        
-        switchTemp.tintColor = UIColor(named: "corGelinho"); // the "off" color
-        switchTemp.onTintColor = UIColor(named: "corLaranja"); // the "on" color
-        
-        switchTemp.addTarget(self, action: #selector(updateisVibrateActive), for: .touchUpInside)
-        
-        return switchTemp
-    }()
-    
-    //labels
-    lazy var labelVibracao: UILabel = {
-        let labelTemp = UILabel()
-        labelTemp.backgroundColor = UIColor(named: "corAzul")
-        
-        //Cor dos botão
-        labelTemp.tintColor = UIColor(named: "corGelinho")
-        
-        labelTemp.font = UIFont.boldSystemFont(ofSize: 16.0)
-        labelTemp.text = "    Modo de Vibração "
-        
-        labelTemp.layer.masksToBounds = true
-        labelTemp.layer.cornerRadius = 31
-        return labelTemp
-    }()
-    
-    lazy var labelEstado: UILabel = {
-        let labelTemp = UILabel()
-        labelTemp.backgroundColor = UIColor(named: "corAzul")
-        
-        //Cor dos botão
-        labelTemp.tintColor = UIColor(named: "corGelinho")
-        
-        labelTemp.textAlignment = .center
-        
-        labelTemp.text = "À procura da luz"
-        
-        //Enum
-//        var estado = TextoLabelEstados.procurando
-//
-//        switch estado{
-//        case .ligado:
-//            labelEstado.text = "A luz está ligada"
-//        case .desligado:
-//            labelEstado.text = "A luz está desligada"
-//        case .procurando:
-//            labelEstado.text =  "À procura da luz"
-//
-//        }
-        
-        return labelTemp
-    }()
     
     //MARK: -Constraints
     func setupConstraints(){
         
-        let alturaInferiror:CGFloat = 62
-        //Botao de duvidas
-        butaoQuestion.translatesAutoresizingMaskIntoConstraints = false
-        previewView.addSubview(butaoQuestion)
-        let butaoQuestionConstraints:[NSLayoutConstraint] = [
-            butaoQuestion.widthAnchor.constraint(equalToConstant: alturaInferiror),
-            butaoQuestion.heightAnchor.constraint(equalToConstant: alturaInferiror),
-            butaoQuestion.trailingAnchor.constraint(equalTo: previewView.safeAreaLayoutGuide.trailingAnchor,constant: -35),
-            butaoQuestion.bottomAnchor.constraint(equalTo: previewView.safeAreaLayoutGuide.bottomAnchor)
-        ]
-        NSLayoutConstraint.activate(butaoQuestionConstraints)
-        
-        labelVibracao.translatesAutoresizingMaskIntoConstraints = false
-        
-        previewView.addSubview(labelVibracao)
-        let labelVibracaoConstraints:[NSLayoutConstraint] = [
-            labelVibracao.heightAnchor.constraint(equalToConstant: alturaInferiror),
-            labelVibracao.leadingAnchor.constraint(equalTo: previewView.safeAreaLayoutGuide.leadingAnchor,constant: 25),
-            labelVibracao.trailingAnchor.constraint(equalTo: butaoQuestion.leadingAnchor,constant: -15),
-            labelVibracao.bottomAnchor.constraint(equalTo: previewView.safeAreaLayoutGuide.bottomAnchor)
-        ]
-        NSLayoutConstraint.activate(labelVibracaoConstraints)
-        
-        labelEstado.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        //Switch Vibracao
-        switchVibracao.translatesAutoresizingMaskIntoConstraints = false
-        
-        let standardHeight: CGFloat = 31
-        let standardWidth: CGFloat = 51
-
-        let heightRatio = (alturaInferiror-20)/standardHeight
-        let widthRatio = ((alturaInferiror-20)*standardWidth/standardHeight)/standardWidth
-
-        switchVibracao.transform = CGAffineTransform(scaleX: widthRatio, y: heightRatio)
-        
-        previewView.addSubview(switchVibracao)
-        let switchVibracaoConstraints:[NSLayoutConstraint] = [
-            switchVibracao.widthAnchor.constraint(equalToConstant: 30),
-            switchVibracao.heightAnchor.constraint(equalToConstant: 30),
-            switchVibracao.trailingAnchor.constraint(equalTo: labelVibracao.trailingAnchor,constant: -switchVibracao.frame.width/2-10),
-            switchVibracao.centerYAnchor.constraint(equalTo: labelVibracao.centerYAnchor)
-        ]
-        NSLayoutConstraint.activate(switchVibracaoConstraints)
-        
         previewView.addSubview(labelEstado)
+        previewView.addSubview(vibrationBackgroundView)
+        vibrationBackgroundView.addSubview(labelVibracao)
+        vibrationBackgroundView.addSubview(switchVibracao)
+        previewView.addSubview(butaoQuestion)
+        
+        //labelEstado
         let labelEstadoConstraints:[NSLayoutConstraint] = [
-            labelEstado.heightAnchor.constraint(equalToConstant: alturaInferiror),
+            labelEstado.heightAnchor.constraint(equalToConstant: InferiorCustomSafeArea),
             labelEstado.leadingAnchor.constraint(equalTo: previewView.safeAreaLayoutGuide.leadingAnchor),
             labelEstado.trailingAnchor.constraint(equalTo: previewView.safeAreaLayoutGuide.trailingAnchor),
             labelEstado.centerYAnchor.constraint(equalTo: previewView.centerYAnchor,constant: 150)
         ]
         NSLayoutConstraint.activate(labelEstadoConstraints)
-
+        
+        //BackgroundVibracao
+        let vibrationBackgroundViewConstraints: [NSLayoutConstraint] = [
+            vibrationBackgroundView.bottomAnchor.constraint(equalTo: previewView.safeAreaLayoutGuide.bottomAnchor),
+            vibrationBackgroundView.leadingAnchor.constraint(equalTo: previewView.safeAreaLayoutGuide.leadingAnchor, constant: 35),
+            vibrationBackgroundView.trailingAnchor.constraint(equalTo: butaoQuestion.leadingAnchor, constant: -8),
+            vibrationBackgroundView.heightAnchor.constraint(equalToConstant: InferiorCustomSafeArea)
+            
+        ]
+        NSLayoutConstraint.activate(vibrationBackgroundViewConstraints)
+        
+        //LabelVibracao
+        let labelVibracaoConstraints:[NSLayoutConstraint] = [
+            labelVibracao.topAnchor.constraint(equalTo: vibrationBackgroundView.topAnchor),
+            labelVibracao.bottomAnchor.constraint(equalTo: vibrationBackgroundView.bottomAnchor),
+            labelVibracao.leadingAnchor.constraint(equalTo: vibrationBackgroundView.leadingAnchor, constant: 18)
+        ]
+        NSLayoutConstraint.activate(labelVibracaoConstraints)
+        
+        //Switch Vibracao
+        let switchVibracaoConstraints:[NSLayoutConstraint] = [
+            switchVibracao.centerYAnchor.constraint(equalTo: vibrationBackgroundView.centerYAnchor),
+            switchVibracao.leadingAnchor.constraint(equalTo: labelVibracao.trailingAnchor),
+            switchVibracao.trailingAnchor.constraint(equalTo: vibrationBackgroundView.trailingAnchor, constant: -24)
+        ]
+        NSLayoutConstraint.activate(switchVibracaoConstraints)
+        
+        //Botao de duvidas
+        let butaoQuestionConstraints:[NSLayoutConstraint] = [
+            butaoQuestion.widthAnchor.constraint(equalToConstant: InferiorCustomSafeArea),
+            butaoQuestion.heightAnchor.constraint(equalToConstant: InferiorCustomSafeArea),
+            butaoQuestion.trailingAnchor.constraint(equalTo: previewView.safeAreaLayoutGuide.trailingAnchor,constant: -35),
+            butaoQuestion.bottomAnchor.constraint(equalTo: previewView.safeAreaLayoutGuide.bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(butaoQuestionConstraints)
         
     }
     
-    @objc
-    func callForOnBoarding(){
-        let vc = ViewControllerOnBoarding(nibName: nibName, bundle: nil)
-        self.present(vc, animated: true, completion: nil)
-    }
-    
     //MARK: -Interface
+    func verifyFirstLaunch() {
+        if defaults.bool(forKey: "First Launch") == false {
+            //aqui eh quando eh a primeira vez que entra no app
+            defaults.setValue(true, forKey: "First Launch")
+            callForOnBoarding()
+            
+        } else {
+            //aqui todas as outras vezes
+            defaults.setValue(true, forKey: "First Launch")
+        }
+
+    }
     func updateLabelEstado(state: TextoLabelEstados) {
         switch state{
         case .ligado:
@@ -250,6 +278,13 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             labelEstado.text =  "À procura da luz"
             
         }
+        UIAccessibility.post(notification: .announcement, argument: labelEstado.text)
+    }
+    
+    @objc func callForOnBoarding(){
+        let vc = ViewControllerOnBoarding(nibName: nibName, bundle: nil)
+        
+        self.present(vc, animated: true, completion: nil)
     }
     
     @objc func updateisVibrateActive() {
@@ -310,6 +345,37 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         }
         return exifOrientation
     }
+    //MARK: -Voice Over
+    
+    func setupVoiceOver(){
+        
+        butaoQuestion.isAccessibilityElement = true
+        butaoQuestion.accessibilityLabel = "Ajuda"
+        
+        labelVibracao.isAccessibilityElement = false
+        
+        switchVibracao.isAccessibilityElement = true
+        switchVibracao.accessibilityLabel = labelVibracao.text
+        
+//        let groupedElement = UIAccessibilityElement(accessibilityContainer: self)
+//        groupedElement.accessibilityLabel = "\(labelVibracao.text)"
+//        groupedElement.accessibilityFrameInContainerSpace = labelVibracao.frame.union(switchVibracao.frame)
+                
+        
+//        let myAction = UIAccessibilityCustomAction(
+//            name: "Custom Action",
+//            target: self,
+//            selector: #selector(updateisVibrateActive)
+//        )
+//
+//        vibrationBackgroundView.accessibilityCustomActions = [myAction]
+//
+//        self.accessibilityElements = [labelEstado, groupedElement, butaoQuestion]
+    
+
+    }
+    
+
     
     //MARK: -Haptic Feedback
     func vibrate(type: UINotificationFeedbackGenerator.FeedbackType) {
