@@ -135,6 +135,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         return labelTemp
     }()
     
+    //MARK: -Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAVCapture()
