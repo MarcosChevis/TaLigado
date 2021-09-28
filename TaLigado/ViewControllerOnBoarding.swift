@@ -144,17 +144,17 @@ class ViewControllerOnBoarding: UIViewController {
     
     @objc
     func addPageContol(){
-//        if (scrollView.contentOffset.x+view.frame.width<scrollView.contentOffset.x){
+        if (scrollView.contentOffset.x+view.frame.width < view.frame.width*CGFloat(arrayViews.count) ){
         scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x+view.frame.width, y: 0), animated: false)
-//        }
+        }
 
     }
     
     @objc
     func subPageContol(){
-//        if (scrollView.contentOffset.x-view.frame.width>=0){
+        if (scrollView.contentOffset.x-view.frame.width>=0){
             scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x-view.frame.width, y: 0), animated: false)
-//        }
+        }
                 
 
     }
