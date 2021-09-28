@@ -16,6 +16,7 @@ class ViewControllerOnBoarding: UIViewController {
     label.textAlignment = .center
     label.numberOfLines = 5
     label.font = UIFont .boldSystemFont(ofSize: 17.0)
+      label.textColor = UIColor(named: "corGelinho")
     view.addSubview(label)
 //    let imageName = "doubt1"
 //    let image = UIImage(named: imageName)
@@ -40,6 +41,7 @@ class ViewControllerOnBoarding: UIViewController {
     label.textAlignment = .center
     label.numberOfLines = 4
     label.font = UIFont .boldSystemFont(ofSize: 17.0)
+      label.textColor = UIColor(named: "corGelinho")
     view.addSubview(label)
     setupConstrainstsLabel(label: label, view: view)
 //    let imageName = "doubt2"
@@ -64,6 +66,7 @@ class ViewControllerOnBoarding: UIViewController {
     label.numberOfLines = 4
     label.font = UIFont .boldSystemFont(ofSize: 17.0)
     view.addSubview(label)
+      label.textColor = UIColor(named: "corGelinho")
     setupConstrainstsLabel(label: label, view: view)
 //    let imageName = "doubt3.1"
 //    let image = UIImage(named: imageName)
@@ -144,17 +147,17 @@ class ViewControllerOnBoarding: UIViewController {
     
     @objc
     func addPageContol(){
-//        if (scrollView.contentOffset.x+view.frame.width<scrollView.contentOffset.x){
+        if (scrollView.contentOffset.x+view.frame.width < view.frame.width*CGFloat(arrayViews.count) ){
         scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x+view.frame.width, y: 0), animated: false)
-//        }
+        }
 
     }
     
     @objc
     func subPageContol(){
-//        if (scrollView.contentOffset.x-view.frame.width>=0){
+        if (scrollView.contentOffset.x-view.frame.width>=0){
             scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x-view.frame.width, y: 0), animated: false)
-//        }
+        }
                 
 
     }

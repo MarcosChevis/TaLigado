@@ -253,13 +253,19 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         
     }
     
-    @objc
-    func callForOnBoarding(){
-        let vc = ViewControllerOnBoarding(nibName: nibName, bundle: nil)
-        self.present(vc, animated: true, completion: nil)
-    }
-    
     //MARK: -Interface
+    func verifyFirstLaunch() {
+        if defaults.bool(forKey: "First Launch") == false {
+            //aqui eh quando eh a primeira vez que entra no app
+            defaults.setValue(true, forKey: "First Launch")
+            callForOnBoarding()
+            
+        } else {
+            //aqui todas as outras vezes
+            defaults.setValue(true, forKey: "First Launch")
+        }
+
+    }
     func updateLabelEstado(state: TextoLabelEstados) {
         switch state{
         case .ligado:
@@ -270,6 +276,12 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             labelEstado.text =  "À procura da luz"
             
         }
+    }
+    
+    @objc func callForOnBoarding(){
+        let vc = ViewControllerOnBoarding(nibName: nibName, bundle: nil)
+        
+        self.present(vc, animated: true, completion: nil)
     }
     
     @objc func updateisVibrateActive() {
