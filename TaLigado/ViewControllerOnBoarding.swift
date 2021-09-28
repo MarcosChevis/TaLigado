@@ -108,6 +108,30 @@ class ViewControllerOnBoarding: UIViewController {
     return pageControl
   }()
     
+    //MARK: -button
+  lazy var buttonFechar: UIButton = {
+      let buttonTemp = UIButton()
+      buttonTemp.backgroundColor = UIColor(named: "corAzul")
+  
+      //primeiro seta uma configuração
+      let largeConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold, scale: .large)
+
+      //adicionado qual a imagem - SF Symbol - com a figuração criada acima
+       let largeBoldDoc = UIImage(systemName: "xmark.circle.fill", withConfiguration: largeConfig)
+
+      //no final que voce está colocando realmente a imagem
+      buttonTemp.setImage(largeBoldDoc, for: .normal)
+      
+      //Cor dos botão
+      buttonTemp.tintColor = UIColor(named: "corGelinho")
+      
+      buttonTemp.layer.cornerRadius = 31
+      
+      buttonTemp.addTarget(self, action: #selector(actionDismiss), for: .touchUpInside)
+      
+      return buttonTemp
+  }()
+    
     //MARK: -ação de mudar de pagina na pageControl
   @objc
   func pageControlTapHandler(sender: UIPageControl) {
@@ -120,23 +144,31 @@ class ViewControllerOnBoarding: UIViewController {
     
     @objc
     func addPageContol(){
+//        if (scrollView.contentOffset.x+view.frame.width<scrollView.contentOffset.x){
         scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x+view.frame.width, y: 0), animated: false)
-//        let pageIndex = round(scrollView.contentOffset.x / view.frame.width)
-//        pageControl.currentPage = Int(pageIndex)
+//        }
+
     }
     
     @objc
     func subPageContol(){
-    scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x-view.frame.width, y: 0), animated: false)
-        let pageIndex = round(scrollView.contentOffset.x / view.frame.width)
-        pageControl.currentPage = Int(pageIndex)
+//        if (scrollView.contentOffset.x-view.frame.width>=0){
+            scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x-view.frame.width, y: 0), animated: false)
+//        }
+                
+
+    }
+    
+    @objc
+    func actionDismiss(){
+        dismiss(animated: true, completion: nil)
     }
     
     //MARK: -butão
     lazy var butaoNext: UIButton = {
         let button = UIButton(type: .system)
-            button.setTitle("Proximo", for: .normal)
-            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+            button.setTitle("Próximo", for: .normal)
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
             button.setTitleColor(UIColor(named: "corLaranja"), for: .normal)
             button.addTarget(self, action: #selector(addPageContol), for: .touchUpInside)
                 
@@ -146,8 +178,8 @@ class ViewControllerOnBoarding: UIViewController {
     
     lazy var butaoPrevious: UIButton = {
         let button = UIButton(type: .system)
-            button.setTitle("voltar", for: .normal)
-            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+            button.setTitle("Voltar", for: .normal)
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
             button.setTitleColor(UIColor(named: "corLaranja"), for: .normal)
             button.addTarget(self, action: #selector(subPageContol), for: .touchUpInside)
         return button
@@ -162,6 +194,7 @@ class ViewControllerOnBoarding: UIViewController {
     view.addSubview(pageControl)
     view.addSubview(butaoPrevious)
     view.addSubview(butaoNext)
+    view.addSubview( buttonFechar)
     setupConstraints()
     }
     
@@ -174,7 +207,7 @@ class ViewControllerOnBoarding: UIViewController {
             pageControl.heightAnchor.constraint(equalToConstant: 50),
             pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 30),
             pageControl.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -30),
-            pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12)
+            pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40)
         ]
         NSLayoutConstraint.activate(pageControlConstraints)
         
@@ -191,17 +224,26 @@ class ViewControllerOnBoarding: UIViewController {
         //botoes
         butaoNext.translatesAutoresizingMaskIntoConstraints=false
         let butaoNextConstraints:[NSLayoutConstraint] = [
-            butaoNext.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+            butaoNext.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
             butaoNext.rightAnchor.constraint(equalTo: view.rightAnchor, constant:-30)
         ]
         NSLayoutConstraint.activate(butaoNextConstraints)
         
         butaoPrevious.translatesAutoresizingMaskIntoConstraints=false
         let butaoPreviousConstraints:[NSLayoutConstraint] = [
-            butaoPrevious.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+            butaoPrevious.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
             butaoPrevious.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30)
         ]
         NSLayoutConstraint.activate(butaoPreviousConstraints)
+        
+        buttonFechar.translatesAutoresizingMaskIntoConstraints = false
+        let  buttonFecharConstraints:[NSLayoutConstraint] = [
+            buttonFechar.widthAnchor.constraint(equalToConstant: 60),
+            buttonFechar.heightAnchor.constraint(equalToConstant: 60),
+            buttonFechar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25),
+            buttonFechar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant:25)
+        ]
+        NSLayoutConstraint.activate( buttonFecharConstraints)
     }
     
     func setupConstrainstsLabel(label:UILabel, view: UIView){
@@ -215,6 +257,7 @@ class ViewControllerOnBoarding: UIViewController {
         NSLayoutConstraint.activate(labelConstraints)
         
     }
+    
     
 }
 
