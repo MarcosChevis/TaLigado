@@ -15,6 +15,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     var bufferSize: CGSize = .zero
     let InferiorCustomSafeArea: CGFloat = 62
     
+    var defaults = UserDefaults.standard
     var rootLayer: CALayer! = nil
     
     var isVibrateActive: Bool = true
@@ -26,7 +27,6 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     private let videoDataOutput = AVCaptureVideoDataOutput()
     private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     
-    var defaults = UserDefaults.standard
     
     //MARK: -UIElements
     //botão
@@ -138,6 +138,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     //MARK: -Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
         setupAVCapture()
         setupConstraints()
         getVibrationState()
@@ -256,18 +257,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     }
     
     //MARK: -Interface
-    func verifyFirstLaunch() {
-        if defaults.bool(forKey: "First Launch") == false {
-            //aqui eh quando eh a primeira vez que entra no app
-            defaults.setValue(true, forKey: "First Launch")
-            callForOnBoarding()
-            
-        } else {
-            //aqui todas as outras vezes
-            defaults.setValue(true, forKey: "First Launch")
-        }
 
-    }
     func updateLabelEstado(state: TextoLabelEstados) {
         switch state{
         case .ligado:
@@ -282,7 +272,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     }
     
     @objc func callForOnBoarding(){
-        let vc = ViewControllerOnBoarding(nibName: nibName, bundle: nil)
+        let vc = ViewControllerOnBoarding(isOnboarding: false)
         
         self.present(vc, animated: true, completion: nil)
     }
