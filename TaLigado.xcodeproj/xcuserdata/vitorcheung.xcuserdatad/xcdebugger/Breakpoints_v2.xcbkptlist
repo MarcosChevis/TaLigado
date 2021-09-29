@@ -14,9 +14,9 @@
             filePath = "TaLigado/ViewControllerOnBoarding.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
-            landmarkName = "subPageContol()"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
+            landmarkName = "pageControlTapHandler(sender:)"
             landmarkType = "7">
             <Locations>
                <Location

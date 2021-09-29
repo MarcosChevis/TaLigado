@@ -14,78 +14,143 @@ class ViewControllerOnBoarding: UIViewController {
     lazy var view0: UIView = {
         let view = UIView()
         //view.backgroundColor = .systemTeal
+        let labelTitulo = UILabel()
+        labelTitulo.text="Tá ligado?"
+        labelTitulo.textAlignment = .center
+        labelTitulo.font = UIFont .boldSystemFont(ofSize: 30.0)
+        labelTitulo.textColor = UIColor(named: "corGelinho")
+        view.addSubview(labelTitulo)
+        
+        
         let label = UILabel()
-        label.text = "No primeiro uso, terá uma notificação solicitando permissão de uso da sua câmera.\nCom a câmera autorizada, aponte seu celular para os possíveis focos de luz."
+        label.text = "Olá! Sou o Clark, e irei te ajudar a saber se a luz está ligada!\nTá ligado?"
         label.textAlignment = .center
-        label.numberOfLines = 5
+        label.numberOfLines = 0
         label.font = UIFont .boldSystemFont(ofSize: 17.0)
         label.textColor = UIColor(named: "corGelinho")
         view.addSubview(label)
-            let imageName = "on1"
-            let image = UIImage(named: imageName)
-            let imageView = UIImageView(image: image!)
-            view.addSubview(imageView)
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-        //    imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width/5).isActive = true
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -45).isActive = true
-            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 12).isActive = true
-            imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
-            imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier:0.8).isActive = true
-        setupConstrainstsLabel(label: label, view: view)
+        
+        let imageName = "on1"
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image!)
+        view.addSubview(imageView)
+        
+        setupConstrainstsOnbarding(labelTitulo:labelTitulo,label: label,img: imageView, view: view)
+        
         return view
     }()
     
     lazy var view1: UIView = {
         let view = UIView()
         //view.backgroundColor = .systemPink
+        let labelTitulo = UILabel()
+        labelTitulo.text="Permissão da câmera"
+        labelTitulo.textAlignment = .center
+        labelTitulo.font = UIFont .boldSystemFont(ofSize:  30.0)
+        labelTitulo.textColor = UIColor(named: "corGelinho")
+        view.addSubview(labelTitulo)
+        
         let label = UILabel()
-        label.text = "Após detectar a luz, eu irei dizer se tá ligado ou não."
+        label.text = "No primeiro uso, terá uma notificação solicitando permissão de uso da sua câmera, pois sem isso o aplicativo não funciona."
         label.textAlignment = .center
-        label.numberOfLines = 4
+        label.numberOfLines = 0
         label.font = UIFont .boldSystemFont(ofSize: 17.0)
         label.textColor = UIColor(named: "corGelinho")
         view.addSubview(label)
-        setupConstrainstsLabel(label: label, view: view)
-            let imageName = "on2"
-            let image = UIImage(named: imageName)
-            let imageView1 = UIImageView(image: image!)
-            view.addSubview(imageView1)
-            imageView1.contentMode = .scaleAspectFit
-            imageView1.translatesAutoresizingMaskIntoConstraints = false
-            imageView1.widthAnchor.constraint(equalToConstant: 250).isActive = true
-            imageView1.heightAnchor.constraint(equalToConstant: 200).isActive = true
-            imageView1.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            imageView1.topAnchor.constraint(equalTo: view.topAnchor, constant: 95).isActive = true
+        
+        let imageName = "on2"
+        let image = UIImage(named: imageName)
+        let imageView1 = UIImageView(image: image!)
+        view.addSubview(imageView1)
+        
+        setupConstrainstsOnbarding(labelTitulo:labelTitulo,label: label,img: imageView1, view: view)
+        
         return view
     }()
     
     lazy var view2: UIView = {
         let view = UIView()
         //view.backgroundColor = .systemYellow
+        let labelTitulo = UILabel()
+        labelTitulo.text="Uso da câmera"
+        labelTitulo.textAlignment = .center
+        labelTitulo.font = UIFont .boldSystemFont(ofSize:  30.0)
+        labelTitulo.textColor = UIColor(named: "corGelinho")
+        view.addSubview(labelTitulo)
+        
         let label = UILabel()
-        label.text = "Caso queira desativar a vibração ou tem alguma dúvida, só ir para ao canto superior direito do app.\nA câmera somente mostra a visão trasseira do celular."
+        label.text = "Com a câmera autorizada, aponte seu celular para os possíveis focos de luz.\nAqui no app sempre usaremos a câmera traseira, ok?"
         label.textAlignment = .center
-        label.numberOfLines = 4
+        label.numberOfLines = 0
         label.font = UIFont .boldSystemFont(ofSize: 17.0)
-        view.addSubview(label)
         label.textColor = UIColor(named: "corGelinho")
-        setupConstrainstsLabel(label: label, view: view)
-            let imageName = "on3"
-            let image = UIImage(named: imageName)
-            let imageView2 = UIImageView(image: image!)
-            view.addSubview(imageView2)
-            imageView2.contentMode = .scaleAspectFit
-            imageView2.translatesAutoresizingMaskIntoConstraints = false
-            imageView2.widthAnchor.constraint(equalToConstant: 250).isActive = true
-            imageView2.heightAnchor.constraint(equalToConstant: 200).isActive = true
-            imageView2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            imageView2.topAnchor.constraint(equalTo: view.topAnchor, constant: 95).isActive = true
+        view.addSubview(label)
+        
+        let imageName = "on3"
+        let image = UIImage(named: imageName)
+        let imageView2 = UIImageView(image: image!)
+        view.addSubview(imageView2)
+        
+        setupConstrainstsOnbarding(labelTitulo:labelTitulo,label: label,img: imageView2, view: view)
+        
         return view
     }()
     
+    lazy var view3: UIView = {
+        let view = UIView()
+        //view.backgroundColor = .systemYellow
+        let labelTitulo = UILabel()
+        labelTitulo.text="Resposta"
+        labelTitulo.textAlignment = .center
+        labelTitulo.font = UIFont .boldSystemFont(ofSize:  30.0)
+        labelTitulo.textColor = UIColor(named: "corGelinho")
+        view.addSubview(labelTitulo)
+        
+        let label = UILabel()
+        label.text = "Após detectar a luz,  irei dizer se tá ligado ou não e também emitir uma vibração."
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.font = UIFont .boldSystemFont(ofSize: 17.0)
+        view.addSubview(label)
+        label.textColor = UIColor(named: "corGelinho")
+        
+        let imageName = "on4"
+        let image = UIImage(named: imageName)
+        let imageView2 = UIImageView(image: image!)
+        view.addSubview(imageView2)
+        setupConstrainstsOnbarding(labelTitulo:labelTitulo,label: label,img: imageView2, view: view)
+        
+        return view
+    }()
     
-    lazy var arrayViews = [view0, view1, view2]
+    lazy var view4: UIView = {
+        let view = UIView()
+        //view.backgroundColor = .systemYellow
+        
+        let labelTitulo = UILabel()
+        labelTitulo.text="Desativar"
+        labelTitulo.textAlignment = .center
+        labelTitulo.font = UIFont .boldSystemFont(ofSize:  30.0)
+        labelTitulo.textColor = UIColor(named: "corGelinho")
+        view.addSubview(labelTitulo)
+        
+        let label = UILabel()
+        label.text = "Na parte inferior da tela tem dois botões, um para desativar o modo de vibração e outro de ajuda, caso tenha alguma dúvida."
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.font = UIFont .boldSystemFont(ofSize: 17.0)
+        view.addSubview(label)
+        label.textColor = UIColor(named: "corGelinho")
+        let imageName = "on5"
+        let image = UIImage(named: imageName)
+        let imageView2 = UIImageView(image: image!)
+        view.addSubview(imageView2)
+        setupConstrainstsOnbarding(labelTitulo:labelTitulo,label: label,img: imageView2, view: view)
+            
+        return view
+    }()
+    
+    lazy var arrayViews = [view0, view1, view2, view3,view4]
     
     //MARK: -scrollView
     lazy var scrollView: UIScrollView = {
@@ -114,8 +179,28 @@ class ViewControllerOnBoarding: UIViewController {
         return pageControl
     }()
     
-    //MARK: -button
-    lazy var buttonFechar: UIButton = {
+    //MARK: -butão
+    lazy var butaoNext: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Próximo", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.setTitleColor(UIColor(named: "corLaranja"), for: .normal)
+        button.addTarget(self, action: #selector(addPageContol), for: .touchUpInside)
+        
+        return button
+        
+    }()
+    
+    lazy var butaoPrevious: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Voltar", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.setTitleColor(UIColor(named: "corLaranja"), for: .normal)
+        button.addTarget(self, action: #selector(subPageContol), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var butaoFechar: UIButton = {
         let buttonTemp = UIButton()
         buttonTemp.backgroundColor = UIColor(named: "corAzul")
         
@@ -154,72 +239,6 @@ class ViewControllerOnBoarding: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: -ação de mudar de pagina na pageControl
-    @objc
-    func pageControlTapHandler(sender: UIPageControl) {
-        
-        var frame: CGRect = scrollView.frame
-        frame.origin.x = frame.size.width * CGFloat(sender.currentPage )
-        scrollView.scrollRectToVisible(frame, animated: true)
-        
-    }
-    
-    @objc
-    func addPageContol(){
-        if (scrollView.contentOffset.x+view.frame.width < view.frame.width*CGFloat(arrayViews.count)) {
-            
-            scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x+view.frame.width, y: 0), animated: false)
-            
-            if (scrollView.contentOffset.x+view.frame.width == view.frame.width*CGFloat(arrayViews.count)) {
-                butaoNext.setTitle("Terminar", for: .normal)
-            }
-        } else {
-            //dismiss
-            navigationController?.pushViewController(VisionObjectRecognitionViewController(), animated: true)
-        }
-        
-    }
-    
-    @objc
-    func subPageContol(){
-        if (scrollView.contentOffset.x-view.frame.width>=0){
-            scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x-view.frame.width, y: 0), animated: false)
-        }
-        
-        
-    }
-    
-    @objc
-    func actionDismiss(){
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @objc
-    func actionNavigateViewController() {
-        navigationController?.pushViewController(VisionObjectRecognitionViewController(), animated: true)
-    }
-    
-    //MARK: -butão
-    lazy var butaoNext: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Próximo", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.setTitleColor(UIColor(named: "corLaranja"), for: .normal)
-        button.addTarget(self, action: #selector(addPageContol), for: .touchUpInside)
-        
-        return button
-        
-    }()
-    
-    lazy var butaoPrevious: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Voltar", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.setTitleColor(UIColor(named: "corLaranja"), for: .normal)
-        button.addTarget(self, action: #selector(subPageContol), for: .touchUpInside)
-        return button
-    }()
-    
     //MARK: -viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -230,7 +249,7 @@ class ViewControllerOnBoarding: UIViewController {
         view.addSubview(pageControl)
         view.addSubview(butaoPrevious)
         view.addSubview(butaoNext)
-        view.addSubview( buttonFechar)
+        view.addSubview(butaoFechar)
         setupConstraints()
     }
     
@@ -272,26 +291,93 @@ class ViewControllerOnBoarding: UIViewController {
         ]
         NSLayoutConstraint.activate(butaoPreviousConstraints)
         
-        buttonFechar.translatesAutoresizingMaskIntoConstraints = false
+        butaoFechar.translatesAutoresizingMaskIntoConstraints = false
         let  buttonFecharConstraints:[NSLayoutConstraint] = [
-            buttonFechar.widthAnchor.constraint(equalToConstant: 60),
-            buttonFechar.heightAnchor.constraint(equalToConstant: 60),
-            buttonFechar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25),
-            buttonFechar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant:25)
+            butaoFechar.widthAnchor.constraint(equalToConstant: 60),
+            butaoFechar.heightAnchor.constraint(equalToConstant: 60),
+            butaoFechar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25),
+            butaoFechar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant:25)
         ]
         NSLayoutConstraint.activate( buttonFecharConstraints)
     }
     
-    func setupConstrainstsLabel(label:UILabel, view: UIView){
+    func setupConstrainstsOnbarding(labelTitulo:UILabel, label:UILabel, img:UIImageView, view: UIView){
+        
+        labelTitulo.translatesAutoresizingMaskIntoConstraints = false
+        let labelTituloConstraints:[NSLayoutConstraint] = [
+            labelTitulo.topAnchor.constraint(equalTo: view.topAnchor),
+            labelTitulo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            labelTitulo.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
+        ]
+        NSLayoutConstraint.activate(labelTituloConstraints)
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         let labelConstraints:[NSLayoutConstraint] = [
-            label.topAnchor.constraint(equalTo: view.topAnchor),
+            label.topAnchor.constraint(equalTo: labelTitulo.bottomAnchor,constant: 30),
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            label.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
         ]
         NSLayoutConstraint.activate(labelConstraints)
         
+        img.contentMode = .scaleAspectFit
+        img.translatesAutoresizingMaskIntoConstraints = false
+        let imgConstrainsts:[NSLayoutConstraint] = [
+            img.widthAnchor.constraint(equalToConstant: 250),
+            img.heightAnchor.constraint(equalToConstant: 200),
+            img.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            img.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 50)
+        ]
+        NSLayoutConstraint.activate(imgConstrainsts)
+        
+        
+    }
+
+    
+    //MARK: -ação de mudar de pagina na pageControl
+    @objc
+    func pageControlTapHandler(sender: UIPageControl) {
+        
+        var frame: CGRect = scrollView.frame
+        frame.origin.x = frame.size.width * CGFloat(sender.currentPage )
+        scrollView.scrollRectToVisible(frame, animated: true)
+        
+    }
+    
+    @objc
+    func addPageContol(){
+        if (scrollView.contentOffset.x+view.frame.width < view.frame.width*CGFloat(arrayViews.count)) {
+            
+            scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x+view.frame.width, y: 0), animated: false)
+            
+            if (scrollView.contentOffset.x+view.frame.width == view.frame.width*CGFloat(arrayViews.count)) {
+                butaoNext.setTitle("Terminar", for: .normal)
+            }
+        } else {
+            //dismiss
+            dismiss(animated: true, completion: nil)
+            navigationController?.pushViewController(VisionObjectRecognitionViewController(), animated: true)
+            
+        }
+        
+    }
+    
+    @objc
+    func subPageContol(){
+        if (scrollView.contentOffset.x-view.frame.width>=0){
+            scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x-view.frame.width, y: 0), animated: false)
+        }
+        
+        
+    }
+    
+    @objc
+    func actionDismiss(){
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc
+    func actionNavigateViewController() {
+        navigationController?.pushViewController(VisionObjectRecognitionViewController(), animated: true)
     }
     
     
