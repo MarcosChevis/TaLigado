@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var defaults = UserDefaults.standard
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -19,9 +20,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = VisionObjectRecognitionViewController()
+        window.rootViewController = UINavigationController(rootViewController: verifyFirstLaunch())
         window.makeKeyAndVisible()
         self.window = window
+
+    }
+    
+    func verifyFirstLaunch() -> UIViewController {
+        if defaults.bool(forKey: "First Launch") == false {
+            //aqui eh quando eh a primeira vez que entra no app
+            defaults.setValue(true, forKey: "First Launch")
+            return ViewControllerOnBoarding(isOnboarding: true)
+            
+        } else {
+            //aqui todas as outras vezes
+            defaults.setValue(true, forKey: "First Launch")
+            return VisionObjectRecognitionViewController()
+        }
 
     }
 
