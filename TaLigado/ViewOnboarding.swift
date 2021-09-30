@@ -56,13 +56,21 @@ class ViewOnboarding:UIView{
         ]
         NSLayoutConstraint.activate(labelConstraints)
         
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
+        
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        let screenH = UIScreen.main.bounds.height
+
         let imgConstrainsts:[NSLayoutConstraint] = [
-            imageView.widthAnchor.constraint(equalToConstant: 250),
-            imageView.heightAnchor.constraint(equalToConstant: 200),
-            imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            imageView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 50)
+            imageView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
+            imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -screenH/3),
+            imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
+            imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
+            
+//            imageView.widthAnchor.constraint(equalToConstant: 250),
+//            imageView.heightAnchor.constraint(equalToConstant: 200),
+//            imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+//            imageView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 50)
         ]
         NSLayoutConstraint.activate(imgConstrainsts)
         
