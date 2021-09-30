@@ -12,47 +12,48 @@ class ViewControllerOnBoarding: UIViewController {
     
     //MARK: -View
     lazy var view0:ViewOnboarding =  {
-        let view = ViewOnboarding()
-        view.setup(titulo: "Tá ligado?",
-                   text: "Olá! Sou o Clark, e irei te ajudar a saber se a luz está ligada!\nTá ligado?",
-                   imageName: "on1")
-        return view
-    }()
-    
-    
-    lazy var view1:ViewOnboarding =  {
-        let view = ViewOnboarding()
-        view.setup(titulo: "Permissão da câmera",
-                   text: "No primeiro uso, terá uma notificação solicitando permissão de uso da sua câmera, pois sem isso o aplicativo não funciona.",
-                   imageName: "on2")
-        return view
-    }()
-    
-    lazy var view2:ViewOnboarding =  {
-        let view = ViewOnboarding()
-        view.setup(titulo: "Uso da câmera",
-                   text: "Com a câmera autorizada, aponte seu celular para os possíveis focos de luz.\nAqui no app sempre usaremos a câmera traseira, ok?",
-                   imageName: "on3")
-        return view
-    }()
-    
-    lazy var view3:ViewOnboarding =  {
-        let view = ViewOnboarding()
-        view.setup(titulo: "Resposta",
-                   text: "Após detectar a luz,  irei dizer se tá ligado ou não e também emitir uma vibração.",
-                   imageName: "on4")
-        return view
-    }()
-    
-    lazy var view4:ViewOnboarding =  {
-        let view = ViewOnboarding()
-        view.setup(titulo: "Desativar",
-                   text: "Na parte inferior da tela tem dois botões, um para desativar o modo de vibração e outro de ajuda, caso tenha alguma dúvida.",
-                   imageName: "on.6")
-        return view
-    }()
-    
-    lazy var arrayViews = [view0, view1, view2, view3,view4]
+           let view = ViewOnboarding()
+           view.setup(titulo: "Tá ligado?",
+                      text: "Olá! Sou o Clark, e irei te ajudar a saber se a luz está ligada!\nTá ligado?",
+                      imageName: "on1", imageDescription: "O Clarck é uma abstração de um pato que se parece com uma lâmpada. Nesta imagem de um lado tem o Clarck acesso e no outro apagado")
+           return view
+       }()
+       
+       
+       lazy var view1:ViewOnboarding =  {
+           let view = ViewOnboarding()
+           view.setup(titulo: "Permissão da câmera",
+                      text: "No primeiro uso, terá uma notificação solicitando permissão de uso da sua câmera, pois sem isso o aplicativo não funciona.",
+                      imageName: "on2", imageDescription: "Simulação de notificação para acesso a câmera")
+           return view
+       }()
+       
+       lazy var view2:ViewOnboarding =  {
+           let view = ViewOnboarding()
+           view.setup(titulo: "Uso da câmera",
+                      text: "Com a câmera autorizada, aponte seu celular para os possíveis focos de luz.\nAqui no app sempre usaremos a câmera traseira, ok?",
+                      imageName: "on3", imageDescription: "Lâmpada enquadrada no foco que indica a luz")
+           return view
+       }()
+       
+       lazy var view3:ViewOnboarding =  {
+           let view = ViewOnboarding()
+           view.setup(titulo: "Resposta",
+                      text: "Após detectar a luz,  irei dizer se tá ligado ou não e também emitir uma vibração.",
+                      imageName: "on4", imageDescription: "Clarck vibrando e falando a resposta")
+           return view
+       }()
+       
+       lazy var view4:ViewOnboarding =  {
+           let view = ViewOnboarding()
+           view.setup(titulo: "Desativar",
+                      text: "Na parte inferior da tela tem dois botões, um para desativar o modo de vibração e outro de ajuda, caso tenha alguma dúvida.",
+                      imageName: "on.6", imageDescription: "Clarck tonto de tanto vibrar")
+           return view
+       }()
+       
+       lazy var arrayViews = [view0, view1, view2, view3,view4]
+
     
     //MARK: -scrollView
     lazy var scrollView: UIScrollView = {
