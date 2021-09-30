@@ -4,19 +4,19 @@
 //
 //  Created by Vitor Cheung on 29/09/21.
 //
-
 import Foundation
 import UIKit
 class ViewOnboarding:UIView{
     
     
     let labelTitulo = UILabel()
+    var imageDescription = ""
     let label = UILabel()
     var imageName = String()
     lazy var image = UIImage(named: imageName)
     lazy var imageView = UIImageView(image: image!)
     
-    func setup(titulo:String,text:String,imageName:String){
+    func setup(titulo:String,text:String,imageName:String, imageDescription:String){
         
         labelTitulo.text=titulo
         labelTitulo.textAlignment = .center
@@ -27,13 +27,19 @@ class ViewOnboarding:UIView{
         label.text = text
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = UIFont .boldSystemFont(ofSize: 19.0)
+        label.font = UIFont .boldSystemFont(ofSize: 17.0)
         self.addSubview(label)
         label.textColor = UIColor(named: "corGelinho")
-        
+        self.imageDescription = imageDescription
         self.imageName = imageName
         self.addSubview(imageView)
         setupConstrainstsOnbarding()
+        setUpVoiceOver()
+    }
+    
+    func setUpVoiceOver () {
+        imageView.isAccessibilityElement = true
+        imageView.accessibilityLabel = imageDescription
         
     }
     
@@ -42,7 +48,7 @@ class ViewOnboarding:UIView{
         
         labelTitulo.translatesAutoresizingMaskIntoConstraints = false
         let labelTituloConstraints:[NSLayoutConstraint] = [
-            labelTitulo.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+            labelTitulo.topAnchor.constraint(equalTo: self.topAnchor),
             labelTitulo.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
             labelTitulo.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30)
         ]
@@ -50,27 +56,19 @@ class ViewOnboarding:UIView{
         
         label.translatesAutoresizingMaskIntoConstraints = false
         let labelConstraints:[NSLayoutConstraint] = [
-            label.topAnchor.constraint(equalTo: labelTitulo.bottomAnchor,constant: 40),
+            label.topAnchor.constraint(equalTo: labelTitulo.bottomAnchor,constant: 30),
             label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
             label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30)
         ]
         NSLayoutConstraint.activate(labelConstraints)
         
-        imageView.contentMode = .scaleAspectFit
-        
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        let screenH = UIScreen.main.bounds.height
-
         let imgConstrainsts:[NSLayoutConstraint] = [
-            imageView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
-            imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -screenH/3),
-            imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
-            imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
-            
-//            imageView.widthAnchor.constraint(equalToConstant: 250),
-//            imageView.heightAnchor.constraint(equalToConstant: 200),
-//            imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-//            imageView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 50)
+            imageView.widthAnchor.constraint(equalToConstant: 250),
+            imageView.heightAnchor.constraint(equalToConstant: 200),
+            imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            imageView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 50)
         ]
         NSLayoutConstraint.activate(imgConstrainsts)
         
