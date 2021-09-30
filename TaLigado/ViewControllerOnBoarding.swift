@@ -48,7 +48,7 @@ class ViewControllerOnBoarding: UIViewController {
         let view = ViewOnboarding()
         view.setup(titulo: "Desativar",
                    text: "Na parte inferior da tela tem dois botões, um para desativar o modo de vibração e outro de ajuda, caso tenha alguma dúvida.",
-                   imageName: "on5")
+                   imageName: "on.6")
         return view
     }()
     
