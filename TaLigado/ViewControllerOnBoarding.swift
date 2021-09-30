@@ -107,7 +107,7 @@ class ViewControllerOnBoarding: UIViewController {
         buttonTemp.backgroundColor = UIColor(named: "corAzul")
         
         //primeiro seta uma configuração
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold, scale: .large)
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 26, weight: .bold, scale: .large)
         
         //adicionado qual a imagem - SF Symbol - com a figuração criada acima
         let largeBoldDoc = UIImage(systemName: "xmark.circle.fill", withConfiguration: largeConfig)
@@ -195,10 +195,10 @@ class ViewControllerOnBoarding: UIViewController {
         
         butaoFechar.translatesAutoresizingMaskIntoConstraints = false
         let  buttonFecharConstraints:[NSLayoutConstraint] = [
-            butaoFechar.widthAnchor.constraint(equalToConstant: 60),
-            butaoFechar.heightAnchor.constraint(equalToConstant: 60),
+            butaoFechar.widthAnchor.constraint(equalToConstant: 48),
+            butaoFechar.heightAnchor.constraint(equalToConstant: 48),
             butaoFechar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25),
-            butaoFechar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant:25)
+            butaoFechar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant:16)
         ]
         NSLayoutConstraint.activate( buttonFecharConstraints)
     }

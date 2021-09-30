@@ -272,9 +272,9 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     }
     
     @objc func callForOnBoarding(){
-        let vc = ViewControllerOnBoarding(isOnboarding: false)
+        let vc = ViewControllerOnBoarding(isOnboarding: true)
         
-        self.present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func updateisVibrateActive() {

@@ -27,7 +27,7 @@ class ViewOnboarding:UIView{
         label.text = text
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = UIFont .boldSystemFont(ofSize: 17.0)
+        label.font = UIFont .boldSystemFont(ofSize: 19.0)
         self.addSubview(label)
         label.textColor = UIColor(named: "corGelinho")
         
@@ -42,7 +42,7 @@ class ViewOnboarding:UIView{
         
         labelTitulo.translatesAutoresizingMaskIntoConstraints = false
         let labelTituloConstraints:[NSLayoutConstraint] = [
-            labelTitulo.topAnchor.constraint(equalTo: self.topAnchor),
+            labelTitulo.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             labelTitulo.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
             labelTitulo.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30)
         ]
@@ -50,7 +50,7 @@ class ViewOnboarding:UIView{
         
         label.translatesAutoresizingMaskIntoConstraints = false
         let labelConstraints:[NSLayoutConstraint] = [
-            label.topAnchor.constraint(equalTo: labelTitulo.bottomAnchor,constant: 30),
+            label.topAnchor.constraint(equalTo: labelTitulo.bottomAnchor,constant: 40),
             label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
             label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30)
         ]
