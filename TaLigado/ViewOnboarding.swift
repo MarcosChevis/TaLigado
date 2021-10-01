@@ -4,19 +4,19 @@
 //
 //  Created by Vitor Cheung on 29/09/21.
 //
-
 import Foundation
 import UIKit
 class ViewOnboarding:UIView{
     
     
     let labelTitulo = UILabel()
+    var imageDescription = ""
     let label = UILabel()
     var imageName = String()
     lazy var image = UIImage(named: imageName)
     lazy var imageView = UIImageView(image: image!)
     
-    func setup(titulo:String,text:String,imageName:String){
+    func setup(titulo:String,text:String,imageName:String, imageDescription:String){
         
         labelTitulo.text=titulo
         labelTitulo.textAlignment = .center
@@ -30,10 +30,16 @@ class ViewOnboarding:UIView{
         label.font = UIFont .boldSystemFont(ofSize: 17.0)
         self.addSubview(label)
         label.textColor = UIColor(named: "corGelinho")
-        
+        self.imageDescription = imageDescription
         self.imageName = imageName
         self.addSubview(imageView)
         setupConstrainstsOnbarding()
+        setUpVoiceOver()
+    }
+    
+    func setUpVoiceOver () {
+        imageView.isAccessibilityElement = true
+        imageView.accessibilityLabel = imageDescription
         
     }
     
