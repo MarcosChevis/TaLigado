@@ -263,7 +263,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         case .ligado:
             labelEstado.text = "A luz está ligada"
         case .desligado:
-            labelEstado.text = "A luz está desligada"
+            labelEstado.text = "À procura da luz"
         case .procurando:
             labelEstado.text =  "À procura da luz"
             
