@@ -23,7 +23,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>O TáLigado precisa da sua permissão para acessar a câmera e identificar luzaes acesas.</string>
+	<string>O TáLigado? precisa da sua permissão para acessar a câmera e identificar luzes acesas.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
