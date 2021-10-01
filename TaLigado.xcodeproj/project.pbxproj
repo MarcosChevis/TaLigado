@@ -15,8 +15,8 @@
 		BA17917A26EBF3B800D850EC /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA17917926EBF3B800D850EC /* CameraViewController.swift */; };
 		BA17917F26EBF3B900D850EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA17917E26EBF3B900D850EC /* Assets.xcassets */; };
 		BA17918226EBF3B900D850EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA17918026EBF3B900D850EC /* LaunchScreen.storyboard */; };
+		BA66FFFF270692BF005C3C4E /* LightObjectDetector 5.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BA66FFFE270692BE005C3C4E /* LightObjectDetector 5.mlmodel */; };
 		BA9FEA1A26FBC5FB00BD5CCD /* VisionObjectRecognitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9FEA1926FBC5FB00BD5CCD /* VisionObjectRecognitionViewController.swift */; };
-		BA9FEA1C26FBC98300BD5CCD /* ObjectDetector.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BA9FEA1B26FBC98300BD5CCD /* ObjectDetector.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +30,8 @@
 		BA17917E26EBF3B900D850EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA17918126EBF3B900D850EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA17918326EBF3B900D850EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA66FFFE270692BE005C3C4E /* LightObjectDetector 5.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "LightObjectDetector 5.mlmodel"; sourceTree = "<group>"; };
 		BA9FEA1926FBC5FB00BD5CCD /* VisionObjectRecognitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionObjectRecognitionViewController.swift; sourceTree = "<group>"; };
-		BA9FEA1B26FBC98300BD5CCD /* ObjectDetector.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ObjectDetector.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +71,7 @@
 				0604FF1526FE46BA00943BF3 /* ViewControllerOnBoarding.swift */,
 				06C270312704F95800C9CC77 /* ViewOnboarding.swift */,
 				0604FF1727022C1300943BF3 /* TextoLabelEstados.swift */,
-				BA9FEA1B26FBC98300BD5CCD /* ObjectDetector.mlmodel */,
+				BA66FFFE270692BE005C3C4E /* LightObjectDetector 5.mlmodel */,
 				BA17917E26EBF3B900D850EC /* Assets.xcassets */,
 				BA17918026EBF3B900D850EC /* LaunchScreen.storyboard */,
 				BA17918326EBF3B900D850EC /* Info.plist */,
@@ -152,9 +152,9 @@
 				BA9FEA1A26FBC5FB00BD5CCD /* VisionObjectRecognitionViewController.swift in Sources */,
 				BA17917626EBF3B800D850EC /* AppDelegate.swift in Sources */,
 				BA17917826EBF3B800D850EC /* SceneDelegate.swift in Sources */,
+				BA66FFFF270692BF005C3C4E /* LightObjectDetector 5.mlmodel in Sources */,
 				0604FF1827022C1300943BF3 /* TextoLabelEstados.swift in Sources */,
 				06C270322704F95800C9CC77 /* ViewOnboarding.swift in Sources */,
-				BA9FEA1C26FBC98300BD5CCD /* ObjectDetector.mlmodel in Sources */,
 				0604FF1626FE46BA00943BF3 /* ViewControllerOnBoarding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,7 +296,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
-				DEVELOPMENT_TEAM = R87R6SW4Y7;
+				DEVELOPMENT_TEAM = QRB568C47A;
 				INFOPLIST_FILE = TaLigado/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -317,7 +317,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
-				DEVELOPMENT_TEAM = R87R6SW4Y7;
+				DEVELOPMENT_TEAM = QRB568C47A;
 				INFOPLIST_FILE = TaLigado/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
