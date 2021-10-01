@@ -23,7 +23,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>This sample uses the camera to capture images of breakfast items for object recognition.</string>
+	<string>O TáLigado precisa da sua permissão para acessar a câmera e identificar luzaes acesas.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
